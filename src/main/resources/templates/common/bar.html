@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--顶部菜单栏 topbar-->
+<div id="top-bar" >
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--<a class="navbar-brand" href="#">Brand</a>-->
+                <div style="">
+                    <a class="navbar-brand" style="margin-top: -9px" href="#" th:href="@{/}">
+                        <img src="asserts/img/bootstrap-solid.svg" th:src="@{/assets/img/BattleNet.png}" alt="" width="40" height="40">
+                    </a>
+                </div>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <!-- 左边菜单栏 -->
+                <ul class="nav navbar-nav">
+                    <li ><a href="#" th:href="@{/}">首页 <span class="sr-only">(current)</span></a></li>
+                    <!--<li><a href="#">Link</a></li>-->
+                    <!--<li class="dropdown">-->
+                        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>-->
+                        <!--<ul class="dropdown-menu">-->
+                            <!--<li><a href="#">Action</a></li>-->
+                            <!--<li><a href="#">Another action</a></li>-->
+                            <!--<li><a href="#">Something else here</a></li>-->
+                            <!--<li role="separator" class="divider"></li>-->
+                            <!--<li><a href="#">Separated link</a></li>-->
+                            <!--<li role="separator" class="divider"></li>-->
+                            <!--<li><a href="#">One more separated link</a></li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                </ul>
+                <!-- 搜索框 -->
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="输入QQ号查询打印进度">
+                    </div>
+                    <button type="submit" class="btn btn-default">查询</button>
+                </form>
+                <!-- 尾部菜单栏 -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li ><a id="joinus" href="#"  th:text="加入我们" >加入我们</a></li>
+                    <li ><a id="aboutus" href="#"  th:text="关于我们" >关于我们</a></li>
+                    <li ><a id="login" href="#" th:href="${isLogin}==null?@{/sign}:@{/userHome}" th:text="${isLogin}==null?'登录':${isLogin.getUsername()}" >登录</a></li>
+                    <!--<li><a></a></li>-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">选项 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" th:href="${isLogin}==null?@{/sign}:@{/userHome}">个人中心</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#" th:href="@{/user/logout}">注销</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+<!--左侧边栏 sidebar-->
+<div id="side-bar">
+    <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+            <li th:class="${activeUri}=='document_print'?'nav-link active':'nav-link'">
+                <a href="#" th:href="@{/document_print}">打印参数设置 <span class="sr-only">(current)</span></a>
+            </li>
+
+        </ul>
+        <ul class="nav nav-sidebar">
+            <li th:class="${activeUri}=='progress'?'nav-link active':'nav-link'">
+                <a th:href="@{#}" href="@{/document_print/progress}">打印进度查询（开发中...）</a>
+            </li>
+        </ul>
+        <ul class="nav nav-sidebar">
+            <li><a href="#" th:href="@{/}">其他类型打印</a></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

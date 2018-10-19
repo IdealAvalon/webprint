@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>轻印</title>
+    <link rel="icon" href="../../favicon.ico" th:href="@{/assets/img/favicon.ico}">
+    <!-- 引入JQuery -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!-- 顶部菜单栏 -->
+<div th:replace="common/bar::#top-bar(isLogin=${session.user})"></div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+
+
+    <div class="bs-example" data-example-id="thumbnails-with-custom-content">
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img data-src="holder.js/100%x200" alt="100%x200" src="/assets/images/打印.jpeg" th:src="@{/assets/images/打印.jpeg}" data-holder-rendered="true" style="height: 350px; width: 100%; display: block;">
+                    <div class="caption" th:align="center">
+                        <p></p>
+                        <p><a href="#" class="btn btn-primary" role="button" th:href="@{/document_print}" >文档打印</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img data-src="holder.js/100%x200" alt="100%x200" th:src="@{/assets/images/photoprint.jpeg}" src="" data-holder-rendered="true" style="height: 350px; width: 100%; display: block;">
+                    <div class="caption" th:align="center">
+                        <p></p>
+                        <p><a href="#" class="btn btn-primary" role="button" >照片打印</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img data-src="holder.js/100%x200" alt="100%x200" th:src="@{/assets/images/复印.jpeg}" src="" data-holder-rendered="true" style="height: 350px; width: 100%; display: block;">
+                    <div class="caption" th:align="center">
+                        <p></p>
+                        <p><a href="#" class="btn btn-primary" role="button">预约复印</a></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 打印步骤 -->
+    <div class="bs-example" data-example-id="contextual-panels">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">注意事项</h3>
+            </div>
+            <div class="panel-body">
+                为防止文档排版错乱，文档打印仅接受pdf格式
+            </div>
+            <div class="panel-body">
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>

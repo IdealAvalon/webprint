@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="#" th:href="@{/assets/img/favicon.ico}">
+
+    <title>轻印</title>
+    <link rel="icon" href="../../favicon.ico" th:href="@{/assets/img/favicon.ico}">
+
+
+    <!-- 引入JQuery -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" th:href="@{/assets/css/dashboard_user_home.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- 顶部菜单栏 -->
+<div th:replace="common/bar::#top-bar(isLogin=${session.user})"></div>
+<!-- 左侧边栏 -->
+<div th:replace="common/bar::#side-bar(activeUri='document_print')"></div>
+<div class="container-fluid">
+    <div class="row">
+
+
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <h2 class="page-header">参数设置</h2>
+
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                    <!-- 打印参数表单 -->
+                    <form class="bs-example bs-example-form" th:action="@{/documentPrint}" method="post">
+                        <div class="input-group">
+                            <span class="input-group-addon">QQ号</span>
+                            <input type="text" class="form-control" name="qqNumber" placeholder="请填写真实QQ号，可查询打印进度"
+                                   aria-describedby="basic-addon1" >
+                        </div>
+                        <br>
+                        <div>
+                            <label>色彩</label>
+                            <br/>
+                            <span class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="color" value="0"
+                                    th:checked="true">
+                                <label class="form-check-label">黑白</label>
+                            </span>
+                            <span class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="color" value="1"
+                                    th:checked="false">
+                                <label class="form-check-label">彩色</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div>
+                            <label>双面</label>
+                            <br/>
+                            <span class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="double" value="0"
+                                       th:checked="true">
+                                <label class="form-check-label">单面</label>
+                            </span>
+                            <span class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="double" value="1"
+                                       th:checked="false">
+                                <label class="form-check-label">双面</label>
+                            </span>
+                        </div>
+                        <br>
+                        <div>
+                            <label>纸张大小</label>
+                            <br/>
+                            <span class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="size" value="0"
+                                       th:checked="true">
+                                <label class="form-check-label">A4</label>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="input-group-addon">备注</span>
+                            <input type="text" class="form-control" name="qqNumber" placeholder="填写其他需求信息"
+                                   aria-describedby="basic-addon1" >
+                        </div>
+                        <br>
+                        <a type="submit" class="btn btn-primary" href="http://yun.steinsgate.cc:888" target="_blank">上传文件</a>
+                        <br>
+                        <br>
+                        <!-- 上传文件的方法 -->
+                        <div class="bs-example" data-example-id="contextual-panels">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">上传文件的方法及注意事项</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <p>采用网盘上传，用户名密码均为英文小写字母 a </p>
+                                    <p>请自行创建文件夹，以自己的QQ号命名，并将文件上传到其目录下</p>
+                                    <p>为防止排版错乱，仅接受<strong>pdf</strong>格式的文档！</p>
+                                    <p>文件会在网盘中<strong>共享保存一天</strong>，如果有隐私文件，请加QQ:1585324334，发送离线文件</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success">提交
+                        </button>
+                    </form>
+                    <!-- 打印参数表单 -->
+                </main>
+
+            </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

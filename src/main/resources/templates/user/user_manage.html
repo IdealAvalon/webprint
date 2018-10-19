@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="#" th:href="@{/assets/img/favicon.ico}">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="dashboard_user.css" th:href="@{/assets/css/dashboard_user_home.css}" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+<!-- 顶部菜单栏 -->
+<div th:replace="common/bar::#top-bar(isLogin=${session.user})"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- 左侧边栏 -->
+        <div th:replace="common/bar::#side-bar(activeUri='users')"></div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">用户管理</h1>
+
+            <h2 ><a th:href="@{/user}" type="button" class="btn btn-lg btn-success">添加用户</a></h2>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>用户名</th>
+                        <th>手机号</th>
+                        <th>email</th>
+                        <th>性别</th>
+                        <th>生日</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user:${users}">
+                        <td th:text="${user.id}">1</td>
+                        <td th:text="${user.username}">zhangsan</td>
+                        <td th:text="${user.phone}">15555555555</td>
+                        <td th:text="${user.email}">111@12333.com</td>
+                        <td th:text="${user.gender}=='1'?'男':'女'">男</td>
+                        <td th:text="${#dates.format(user.birth,'yyyy-MM-dd')}">2012-01-01</td>
+                        <td>
+                            <a class="btn btn-sm btn-primary" th:href="@{/user/} + ${user.id}">编辑</a>
+                            <!-- 添加一个自定义属性 -->
+                            <a th:attr="del_uri=@{/user/}+${user.id}" class="btn btn-sm btn-danger deleteBtn">删除</a>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- 用来提交delete请求 -->
+            <!--就算是要写delete、put方式的请求，form表单中一定也要加上method="post"-->
+            <form id="deleteUserForm" method="post">
+                <input type="hidden" name="_method" value="delete">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+    <!-- 使用类选择器 -->
+    $(".deleteBtn").click(function(){
+        $("#deleteUserForm").attr("action",$(this).attr("del_uri")).submit()
+    })
+</script>
+
+</body>
+</html>
