@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
-                    <img data-src="holder.js/100%x200" alt="100%x200" src="/assets/images/打印.jpeg" th:src="@{/assets/images/打印.jpeg}" data-holder-rendered="true" style="height: 350px; width: 100%; display: block;">
+                    <a th:href="@{/document_print}"><img data-src="holder.js/100%x200" alt="100%x200" src="/assets/images/打印.jpeg" th:src="@{/assets/images/打印.jpeg}" data-holder-rendered="true" style="height: 350px; width: 100%; display: block;"></a>
                     <div class="caption" th:align="center">
                         <p></p>
                         <p><a href="#" class="btn btn-primary" role="button" th:href="@{/document_print}" >文档打印</a></p>
@@ -59,13 +59,12 @@
     <div class="bs-example" data-example-id="contextual-panels">
         <div class="panel panel-info">
             <div class="panel-heading">
-                <h3 class="panel-title">注意事项</h3>
+                <h3 class="panel-title">注意事项（第一次使用必读！）</h3>
             </div>
             <div class="panel-body">
-                为防止文档排版错乱，文档打印仅接受pdf格式
-            </div>
-            <div class="panel-body">
-
+                <p>由于网站试用阶段，<strong>使用前请先加店长QQ：1585324334</strong></p>
+                <p>为防止排版错乱，仅接受<strong>pdf</strong>格式的文档！</p>
+                <p>默认上传的所有文件打印一份，如需打印多份，请在备注中说明哪个文档打印多少份，或者全部n份</p>
             </div>
         </div>
     </div>
