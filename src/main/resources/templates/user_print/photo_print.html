@@ -37,7 +37,7 @@
                 <h2 class="page-header">参数设置</h2>
                 <!--<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">-->
                     <!-- 打印参数表单 -->
-                    <form class="bs-example bs-example-form" th:action="@{/documentPrint}" method="post">
+                    <form class="bs-example bs-example-form" th:action="@{/photoPrint}" method="post">
                         <div class="input-group ">
                             <span class="input-group-addon">QQ号</span>
                             <input type="text" class="form-control" name="qqNumber" placeholder="请填写真实QQ号，可查询打印进度"
@@ -45,7 +45,7 @@
                         </div>
                         <br>
                         <div class="container-fluid">
-                            <div class="col-sm-6 col-md-4">
+                            <div class="col-sm-6 col-md-6">
                                 <label>色彩</label>
                                 <br/>
                                 <span class="form-check form-check-inline">
@@ -59,48 +59,30 @@
                                     <label class="form-check-label">彩色</label>
                                 </span>
                             </div>
-                            <div class="col-sm-6 col-md-4">
-                                <label>双面</label>
+                            <div class="col-sm-6 col-md-6">
+                                <label>尺寸</label>
                                 <br/>
                                 <span class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="twoSided" value="0"
+                                    <input class="form-check-input" type="radio" name="paperSize" value="1"
                                            th:checked="true">
-                                    <label class="form-check-label">单面</label>
+                                    <label class="form-check-label">一寸</label>
                                 </span>
                                 <span class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="twoSided" value="1"
+                                    <input class="form-check-input" type="radio" name="paperSize" value="2"
                                            th:checked="false">
-                                    <label class="form-check-label">双面</label>
+                                    <label class="form-check-label">两寸</label>
+                                </span>
+                                <span class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="paperSize" value="5"
+                                           th:checked="false">
+                                    <label class="form-check-label">五寸</label>
+                                </span>
+                                <span class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="paperSize" value="6"
+                                           th:checked="false">
+                                    <label class="form-check-label">六寸</label>
                                 </span>
                             </div>
-                            <div class="col-sm-6 col-md-4">
-                                <label>纸张大小</label>
-                                <br/>
-                                <span class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="paperSize" value="0"
-                                           th:checked="true">
-                                    <label class="form-check-label">A4</label>
-                            </div>
-                        </div>
-                        <br>
-                        <div>
-                            <label>装订</label>
-                            <br/>
-                            <span class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="bind" value="0"
-                                       th:checked="true">
-                                <label class="form-check-label">不装订</label>
-                            </span>
-                            <span class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="bind" value="1"
-                                       th:checked="false">
-                                <label class="form-check-label">左上角一个钉</label>
-                            </span>
-                            <span class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="bind" value="2"
-                                       th:checked="false">
-                                <label class="form-check-label">左侧两个钉</label>
-                            </span>
                         </div>
 
                         <br>

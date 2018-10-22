@@ -1,7 +1,9 @@
 package com.lightprint.webprint.controller;
 
 import com.lightprint.webprint.pojo.Document;
+import com.lightprint.webprint.pojo.Photo;
 import com.lightprint.webprint.service.DocumentService;
+import com.lightprint.webprint.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ public class PrintController {
 
     @Autowired
     private DocumentService documentService;
+
+    @Autowired
+    private PhotoService photoService;
 
     /**
      * 用户添加打印任务
@@ -59,5 +64,33 @@ public class PrintController {
     public String doPrintOrder(@PathVariable("id") Integer id){
         documentService.finishDocumentPrintOrder(id);
         return "redirect:/documentPrintOrders";
+    }
+
+    /**
+     * 用户添加照片打印订单
+     */
+    @PostMapping("photoPrint")
+    public String addUserPhotoPrint(Photo photo){
+        photoService.addPhotoSchedule(photo);
+        return "user_print/success";
+    }
+
+    /**
+     * 管理员查看照片打印订单
+     */
+    @GetMapping("photoPrintOrders")
+    public String toPhotoPrintOrders(Model model){
+        List<Photo> photoList = photoService.getPhotoSchedules();
+        model.addAttribute("photos",photoList);
+        return "manage/photo_print_orders";
+
+    }
+    /**
+     * 管理员操作完成打印照片订单
+     */
+    @GetMapping("photoPrint/{id}")
+    public String doPrintPhotoOrder(@PathVariable("id") Integer id){
+        photoService.finishPhotoOrder(id);
+        return "redirect:/photoPrintOrders";
     }
 }
