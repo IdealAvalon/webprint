@@ -8,6 +8,7 @@ import com.lightprint.webprint.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,16 +42,19 @@ public class LoginController {
      * @return
      */
     @PostMapping("/user/login")
-    public String userLogin(Manager manager, Model model, HttpSession session){
+    public String userLogin(Manager manager, Model model, HttpSession session, HttpServletRequest request){
         Manager queryUser = userService.getUserByUsernameAndPassword(manager);
         String msg;
         if(queryUser!=null&&manager!=null&&queryUser.getPassword().equals(manager.getPassword())) {
             model.addAttribute("user",queryUser);
             session.setAttribute("user",queryUser);
+            request.getSession().setAttribute("user",queryUser);
+            System.out.println(session.getAttribute("user"));
             if(1 == queryUser.getRole()){
-                List<Document> documentSchedules = documentService.getDocumentSchedules();
-                model.addAttribute("documents",documentSchedules);
-                return "manage/all_print_orders";
+//                List<Document> documentSchedules = documentService.getDocumentSchedules();
+//                model.addAttribute("documents",documentSchedules);
+//                return "manage/document_print_orders";
+                return "redirect:/documentPrintOrders";
             }else {
                 return "redirect:/index";
             }

@@ -3,6 +3,7 @@ package com.lightprint.webprint.mapper;
 import com.lightprint.webprint.pojo.Document;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -24,6 +25,9 @@ public interface DocumentMapper {
      * 查询所有文档打印任务
      * @return
      */
-    @Select("select * from document")
+    @Select("select * from document where finished = 0")
     public List<Document> queryDocumentsSchedules();
+
+    @Update("update document set finished = 1 where id = #{id}")
+    public int finishDocumentPrintOrder(Integer id);
 }

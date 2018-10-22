@@ -13,7 +13,7 @@ import java.util.List;
 public class DocumentService {
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    @Autowired
+    @Autowired(required = false)
     private DocumentMapper documentMapper;
 
     public int addDocument(Document document){
@@ -22,5 +22,9 @@ public class DocumentService {
 
     public List<Document> getDocumentSchedules() {
         return documentMapper.queryDocumentsSchedules();
+    }
+
+    public int finishDocumentPrintOrder(Integer id) {
+        return documentMapper.finishDocumentPrintOrder(id);
     }
 }

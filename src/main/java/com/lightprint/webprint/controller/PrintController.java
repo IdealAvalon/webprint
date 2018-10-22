@@ -5,10 +5,7 @@ import com.lightprint.webprint.service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,7 +32,7 @@ public class PrintController {
     }
 
     /**
-     * 管理员查询文档打印
+     * 管理员查询文档打印（这个准备做js的）
      */
     @GetMapping("queryDocuments")
     @ResponseBody
@@ -43,10 +40,24 @@ public class PrintController {
         return documentService.getDocumentSchedules();
     }
 
-    @RequestMapping("all_print_orders")
+    /**
+     * 管理员查询文档打印订单
+     * @param model
+     * @return
+     */
+    @RequestMapping("/documentPrintOrders")
     public String toAllPrintOrders(Model model){
         List<Document> documentSchedules = documentService.getDocumentSchedules();
         model.addAttribute("documents",documentSchedules);
-        return "manage/all_print_orders";
+        return "manage/document_print_orders";
+    }
+
+    /**
+     * 管理员操作完成打印订单
+     */
+    @GetMapping("documentPrint/{id}")
+    public String doPrintOrder(@PathVariable("id") Integer id){
+        documentService.finishDocumentPrintOrder(id);
+        return "redirect:/documentPrintOrders";
     }
 }

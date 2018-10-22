@@ -1,10 +1,14 @@
 package com.lightprint.webprint.config;
 
+import com.lightprint.webprint.component.AccessInterceptor;
+import com.lightprint.webprint.component.UserAutoLoginInterceptor;
 import com.lightprint.webprint.utils.StringToDateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.support.GenericConversionService;
 import org.springframework.web.bind.support.ConfigurableWebBindingInitializer;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
@@ -32,8 +36,8 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/document_print").setViewName("user_print/document_print");
         registry.addViewController("/success").setViewName("user_print/success");
         // 管理员查看订单页
-//        registry.addViewController("/all_print_orders").setViewName("manage/all_print_orders");
         registry.addViewController("/document_print_orders").setViewName("manage/document_print_orders");
+//        registry.addViewController("/documentPrintOrders").setViewName("manage/document_print_orders");
     }
 
     /**
@@ -52,15 +56,26 @@ public class MvcConfig implements WebMvcConfigurer {
     }
 
     /**
+     * 自定义权限过滤
+     */
+    @Bean
+    public AccessInterceptor accessInterceptor(){
+        return new AccessInterceptor();
+    }
+
+    /**
      * 自定义自动登录拦截器，用于测试
      * @return
      */
-//    @Bean
-//    public UserAutoLoginInterceptor userAutoLoginInterceptor(){
-//        return new UserAutoLoginInterceptor();
-//    }
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
+    @Bean
+    public UserAutoLoginInterceptor userAutoLoginInterceptor(){
+        return new UserAutoLoginInterceptor();
+    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
 //        registry.addInterceptor(userAutoLoginInterceptor()).addPathPatterns("/").excludePathPatterns("/sign");
-//    }
+        registry.addInterceptor(accessInterceptor()).addPathPatterns("/**").excludePathPatterns("/sign","/document_print","/documentPrint","/index","/user/**");
+    }
+
+
 }

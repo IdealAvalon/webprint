@@ -17,7 +17,7 @@ public interface UserMapper {
      * 根据条件查找管理员
      * @return
      */
-    @Select("select * from namager where id=#{id}")
+    @Select("select * from manager where id=#{id}")
     public User getUserById(Integer id);
 
     @Select("select * from manager where username=#{username} and password =#{password}")
