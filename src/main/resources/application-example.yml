@@ -30,10 +30,10 @@ spring:
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
-  logging:
-    level:
-      com.zhangdq.*: debug
+logging:
+  level:
+    com.zhangdq.*: debug
 
-  mybatis:
-    configuration:
-      map-underscore-to-camel-case: true
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

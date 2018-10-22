@@ -30,19 +30,6 @@
                 <!-- 左边菜单栏 -->
                 <ul class="nav navbar-nav">
                     <li ><a href="#" th:href="@{/}">首页 <span class="sr-only">(current)</span></a></li>
-                    <!--<li><a href="#">Link</a></li>-->
-                    <!--<li class="dropdown">-->
-                        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>-->
-                        <!--<ul class="dropdown-menu">-->
-                            <!--<li><a href="#">Action</a></li>-->
-                            <!--<li><a href="#">Another action</a></li>-->
-                            <!--<li><a href="#">Something else here</a></li>-->
-                            <!--<li role="separator" class="divider"></li>-->
-                            <!--<li><a href="#">Separated link</a></li>-->
-                            <!--<li role="separator" class="divider"></li>-->
-                            <!--<li><a href="#">One more separated link</a></li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
                 </ul>
                 <!-- 搜索框 -->
                 <form class="navbar-form navbar-left">
@@ -55,16 +42,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li ><a id="joinus" href="#"  th:text="加入我们" >加入我们</a></li>
                     <li ><a id="aboutus" href="#"  th:text="关于我们" >关于我们</a></li>
-                    <li ><a id="login" href="#" th:href="${isLogin}==null?@{/sign}:@{/userHome}" th:text="${isLogin}==null?'登录':${isLogin.getUsername()}" >登录</a></li>
-                    <!--<li><a></a></li>-->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">选项 <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" th:href="${isLogin}==null?@{/sign}:@{/userHome}">个人中心</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#" th:href="@{/user/logout}">注销</a></li>
-                        </ul>
-                    </li>
+                    <li ><a id="login" href="#" th:href="${isLogin}==null?@{/sign}:@{/all_print_orders}" th:text="${isLogin}==null?'登录':${isLogin.getUsername()}" >登录</a></li>
+                    <li><a href="#" th:href="@{/user/logout}">注销</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -89,6 +68,29 @@
         </ul>
     </div>
 </div>
+
+<!--管理页左侧边栏 sidebar-->
+<div id="side-bar-manage">
+    <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+            <li th:class="${activeUri}=='all_print_orders'?'nav-link active':'nav-link'">
+                <a href="#" th:href="@{/all_print_orders}">查询所有打印订单 <span class="sr-only">(current)</span></a>
+            </li>
+
+        </ul>
+        <ul class="nav nav-sidebar">
+            <li th:class="${activeUri}=='document_print_manege'?'nav-link active':'nav-link'">
+                <a href="#" th:href="@{/document_print_orders}">文档打印订单<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <ul class="nav nav-sidebar">
+            <li th:class="${activeUri}=='photo_print_manege'?'nav-link active':'nav-link'">
+                <a href="#" th:href="@{/photo_print_orders}">照片打印订单<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
 
 </body>
 </html>

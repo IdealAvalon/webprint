@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DocumentService {
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
@@ -16,5 +18,9 @@ public class DocumentService {
 
     public int addDocument(Document document){
         return documentMapper.addDocument(document);
+    }
+
+    public List<Document> getDocumentSchedules() {
+        return documentMapper.queryDocumentsSchedules();
     }
 }

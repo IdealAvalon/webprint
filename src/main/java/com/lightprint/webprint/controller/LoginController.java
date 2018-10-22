@@ -1,6 +1,9 @@
 package com.lightprint.webprint.controller;
 
+import com.lightprint.webprint.pojo.Document;
+import com.lightprint.webprint.pojo.Manager;
 import com.lightprint.webprint.pojo.User;
+import com.lightprint.webprint.service.DocumentService;
 import com.lightprint.webprint.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @author: zhangdq
@@ -25,21 +30,30 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private DocumentService documentService;
+
     /**
      * 用户登录
-     * @param user
+     * @param manager
      * @param model
      * @param session
      * @return
      */
     @PostMapping("/user/login")
-    public String userLogin(User user, Model model, HttpSession session){
-        User queryUser = userService.getUserByUsernameAndPassword(user);
+    public String userLogin(Manager manager, Model model, HttpSession session){
+        Manager queryUser = userService.getUserByUsernameAndPassword(manager);
         String msg;
-        if(queryUser!=null&&user!=null&&queryUser.getPassword().equals(user.getPassword())) {
+        if(queryUser!=null&&manager!=null&&queryUser.getPassword().equals(manager.getPassword())) {
             model.addAttribute("user",queryUser);
             session.setAttribute("user",queryUser);
-            return "redirect:/index";
+            if(1 == queryUser.getRole()){
+                List<Document> documentSchedules = documentService.getDocumentSchedules();
+                model.addAttribute("documents",documentSchedules);
+                return "manage/all_print_orders";
+            }else {
+                return "redirect:/index";
+            }
         }
         msg="登录失败~";
         model.addAttribute("msg", msg);
@@ -56,4 +70,11 @@ public class LoginController {
         request.getSession().removeAttribute("user");
         return "redirect:/sign";
     }
+
+//    @RequestMapping("/managePage")
+//    public String toManagePage(Model model){
+//        List<Document> documentSchedules = documentService.getDocumentSchedules();
+//        model.addAttribute("documents",documentSchedules);
+//        return "manage/all_print_orders";
+//    }
 }

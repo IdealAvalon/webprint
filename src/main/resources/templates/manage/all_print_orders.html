@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="#" th:href="@{/assets/img/favicon.ico}">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" th:href="@{/assets/css/dashboard_user_home.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- 顶部菜单栏 -->
+<div th:replace="common/bar::#top-bar(isLogin=${session.user})"></div>
+
+<div class="container-fluid">
+    <!-- 左侧边栏 -->
+    <div th:replace="common/bar::#side-bar-manage(activeUri='all_print_orders')"></div>
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h2 >所有订单</h2>
+
+        <div class="table-responsive">
+            <table class="table table-striped" id = 'document_orders'>
+                <thead>
+                    <tr>
+                        <th>QQ号</th>
+                        <th>色彩</th>
+                        <th>单双面</th>
+                        <th>纸张大小</th>
+                        <th>装订类型</th>
+                        <th>备注</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="document:${documents}" th:switch="${document.bind}">
+                    <td th:text="${document.qqNumber}">1</td>
+                    <td th:text="${document.color}=='0'?'黑白':'彩色'">黑白</td>
+                    <td th:text="${document.twoSided}=='0'?'单面':'双面'">单面</td>
+                    <td th:text="${document.paperSize}=='0'?'A4':'其他'">A4</td>
+                    <td th:case="0" >不装订</td>
+                    <td th:case="1" >一颗钉子</td>
+                    <td th:case="2" >两颗钉子</td>
+                    <td th:text="${document.dcomment}">A4</td>
+                    <td th:text="${#dates.format(document.printDate,'yyyy-MM-dd hh:mm:ss')}">2012-01-01</td>
+                    <td>
+                        <!--<a class="btn btn-sm btn-primary" th:href="@{/user/} + ${user.id}">完成</a>-->
+                        <!-- 添加一个自定义属性 -->
+                        <a th:attr="del_uri=@{/documentPrint/}+${document.id}" class="btn btn-sm btn-danger deleteBtn">完成</a>
+                    </td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+        <!-- 用来提交delete请求 -->
+        <!--就算是要写delete、put方式的请求，form表单中一定也要加上method="post"-->
+        <form id="deleteDocumentForm" method="post">
+            <input type="hidden" name="_method" value="delete">
+        </form>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--
+<script type="text/javascript">
+    //这里的内容会在文档加载完毕时执行
+    $(function(){
+        $.ajax({
+            url:"/queryDocuments",//要请求的服务器url
+            //这是一个对象，表示请求的参数，两个参数：method=ajax&val=xxx，服务器可以通过request.getParameter()来获取
+            //data:{method:"ajaxTest",val:value},
+            async:true,   //是否为异步请求
+            type:"GET", //请求方式
+            dataType:"json",   //服务器返回的数据是什么类型
+            success:function(data){  //这个方法会在服务器执行成功是被调用 ，参数result就是服务器返回的值(现在是json类型)
+                var html = '';
+                html = html + '<thead>' +  '<tr>'
+                html = html + '<th>QQ号</th>\n' +
+                    '          <th>色彩</th>\n' +
+                    '          <th>单双面</th>\n' +
+                    '          <th>纸张大小</th>\n' +
+                    '          <th>装订类型</th>\n' +
+                    '          <th>备注</th>\n' +
+                    '          <th>时间</th>\n' +
+                    '          <th>操作</th>'
+                html = html + '</tr>\n' +
+                    '                </thead>'
+                for ( var i = 0; i < data.length; i++) {//循环json对象，拼接tr,td的html
+                    html = html + '<tr>';
+                    html = html + '<td>' + data[i].qqNumber + '</td>';
+                    if(data[i].color == 0){
+                        html = html + '<td>' + 黑白 + '</td>';
+                    }else{
+                        html = html + '<td>' + 彩色 + '</td>';
+                    }
+                    if(data[i].twoSided == 0){
+                        html = html + '<td>' + 单面 + '</td>';
+                    }else{
+                        html = html + '<td>' + 双面 + '</td>';
+                    }
+
+                    html = html + '<td>' + data[i]. + '</td>';
+                    html = html + '</tr>';
+                }
+                $('#document_orders').html(html);//通过jquery方式获取table，并把tr,td的html输出到table
+            }
+        })
+    });
+</script>
+-->
+<script>
+    <!-- 使用类选择器 -->
+    $(".deleteBtn").click(function(){
+        $("#deleteDocumentForm").attr("action",$(this).attr("del_uri")).submit()
+    })
+</script>
+
+
+</body>
+</html>

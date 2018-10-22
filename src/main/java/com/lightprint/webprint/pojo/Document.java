@@ -1,5 +1,7 @@
 package com.lightprint.webprint.pojo;
 
+import java.util.Date;
+
 public class Document {
 
     private int id;
@@ -8,27 +10,24 @@ public class Document {
     private int color;
     private int twoSided;
     private int bind;
-    private String comment;
+    private String dcomment;
+    private int finished;
+    private Date printDate;
+
 
     public Document() {
     }
 
-    public Document(int id, String qqNumber, int paperSize, int color, int twoSided, int bind, String comment) {
+    public Document(int id, String qqNumber, int paperSize, int color, int twoSided, int bind, String dcomment, int finished, Date printDate) {
         this.id = id;
         this.qqNumber = qqNumber;
         this.paperSize = paperSize;
         this.color = color;
         this.twoSided = twoSided;
         this.bind = bind;
-        this.comment = comment;
-    }
-
-    public int getTwoSided() {
-        return twoSided;
-    }
-
-    public void setTwoSided(int twoSided) {
-        this.twoSided = twoSided;
+        this.dcomment = dcomment;
+        this.finished = finished;
+        this.printDate = printDate;
     }
 
     public int getId() {
@@ -63,6 +62,14 @@ public class Document {
         this.color = color;
     }
 
+    public int getTwoSided() {
+        return twoSided;
+    }
+
+    public void setTwoSided(int twoSided) {
+        this.twoSided = twoSided;
+    }
+
     public int getBind() {
         return bind;
     }
@@ -71,11 +78,27 @@ public class Document {
         this.bind = bind;
     }
 
-    public String getComment() {
-        return comment;
+    public String getDcomment() {
+        return dcomment;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setDcomment(String dcomment) {
+        this.dcomment = dcomment;
+    }
+
+    public int getFinished() {
+        return finished;
+    }
+
+    public void setFinished(int finished) {
+        this.finished = finished;
+    }
+
+    public Date getPrintDate() {
+        return printDate;
+    }
+
+    public void setPrintDate(Date printDate) {
+        this.printDate = printDate;
     }
 }

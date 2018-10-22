@@ -1,5 +1,6 @@
 package com.lightprint.webprint.mapper;
 
+import com.lightprint.webprint.pojo.Manager;
 import com.lightprint.webprint.pojo.User;
 import org.apache.ibatis.annotations.*;
 
@@ -13,14 +14,14 @@ import java.util.List;
 public interface UserMapper {
 
     /**
-     * 根据用户id查找用户
+     * 根据条件查找管理员
      * @return
      */
-    @Select("select * from user where id=#{id}")
+    @Select("select * from namager where id=#{id}")
     public User getUserById(Integer id);
 
-    @Select("select * from user where username=#{username} and password =#{password}")
-    public User getUserByUsernameAndPassword(User user);
+    @Select("select * from manager where username=#{username} and password =#{password}")
+    public Manager getUserByUsernameAndPassword(Manager manager);
 
     /**
      * 查询所有用户

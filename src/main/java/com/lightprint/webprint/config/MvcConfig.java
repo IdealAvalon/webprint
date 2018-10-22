@@ -30,7 +30,10 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/sign").setViewName("sign_in");
         // 用户打印页
         registry.addViewController("/document_print").setViewName("user_print/document_print");
-        registry.addViewController("/submitSuccess").setViewName("user_print/success.html");
+        registry.addViewController("/success").setViewName("user_print/success");
+        // 管理员查看订单页
+//        registry.addViewController("/all_print_orders").setViewName("manage/all_print_orders");
+        registry.addViewController("/document_print_orders").setViewName("manage/document_print_orders");
     }
 
     /**

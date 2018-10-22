@@ -1,6 +1,7 @@
 package com.lightprint.webprint.service;
 
 import com.lightprint.webprint.mapper.UserMapper;
+import com.lightprint.webprint.pojo.Manager;
 import com.lightprint.webprint.pojo.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +33,9 @@ public class UserService {
      * @param user
      * @return
      */
-    public User getUserByUsernameAndPassword(User user) {
-        User user2 = userMapper.getUserByUsernameAndPassword(user);
-        logger.debug(user.getUsername() + " login");
+    public Manager getUserByUsernameAndPassword(Manager manager) {
+        Manager user2 = userMapper.getUserByUsernameAndPassword(manager);
+        logger.debug(manager.getUsername() + " login");
         return user2;
     }
 
