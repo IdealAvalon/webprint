@@ -72,11 +72,13 @@ public class MvcConfig implements WebMvcConfigurer {
     public UserAutoLoginInterceptor userAutoLoginInterceptor(){
         return new UserAutoLoginInterceptor();
     }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 //        registry.addInterceptor(userAutoLoginInterceptor()).addPathPatterns("/").excludePathPatterns("/sign");
-        registry.addInterceptor(accessInterceptor()).addPathPatterns("/**").excludePathPatterns("/sign","/document_print","/documentPrint","/photoPrintPage","/index","/user/**")
-        .excludePathPatterns("/photoPrint");
+//        registry.addInterceptor(accessInterceptor()).addPathPatterns("/**").excludePathPatterns("/sign","/document_print","/documentPrint","/photoPrintPage","/index","/user/**","/static/**")
+//        .excludePathPatterns("/photoPrint","/assets/**")
+//        .excludePathPatterns("/static/**");
     }
 
 
